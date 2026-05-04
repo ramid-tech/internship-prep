@@ -1,0 +1,25 @@
+---
+- name: My first playbook
+  hosts: localhost
+  vars:
+    test_dir: /tmp/ansibletest
+    test_file: hello.txt
+  tasks:
+    - name: Print a message
+      debug:
+        msg: "Hello form Ansible"
+    - name: Create a directory
+      file:
+        path: "{{ test_dir  }}"
+        state: directory
+    - name: Create a file with content
+      copy:
+        content: "This file was created by ansible"
+        dest: "{{ test_dir  }}/{{ test_file  }}"
+    - name: Make sure sshd is running
+      service:
+        name: sshd
+        state: started
+
+
+
